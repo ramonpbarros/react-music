@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import * as Scroll from 'react-scroll';
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import { animateScroll as scroll} from 'react-scroll';
 import AlbumCard from "./components/AlbumCard"
 import './App.css';
 
