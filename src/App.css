@@ -55,6 +55,24 @@ main {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
+.btn-custom {
+  background-color: #f0860d;
+  border-color: #f0860d;
+}
+
+.btn-custom:hover {
+  background-color: #f0860d;
+  border-color: #f0860d;
+}
+
+.zoom {
+  transition: transform 0.2s;
+}
+
+.zoom:hover {
+  transform: scale(1.05);
+}
+
 .read-more-button {
   display: block;
   margin-left: 3px;

@@ -18,17 +18,29 @@ function App() {
         .then(res => res.json())
         .then(result => {
           setArtist(result);
-          setQuery('');
+          setQuery(result.artists[0].strArtist);
+          setAlbum('');
         });
     }
-    if(event.key === "Enter") {
-      fetch(`${api.base}searchalbum.php?s=${query}`)
+    // if(event.key === "Enter") {
+    //   fetch(`${api.base}searchalbum.php?s=${query}`)
+    //     .then(res => res.json())
+    //     .then(result => {
+    //       setAlbum(result);
+    //     });
+    // }
+  }
+
+  function searchAlbum() {
+    console.log(query)
+    fetch(`${api.base}searchalbum.php?s=${query}`)
         .then(res => res.json())
         .then(result => {
           setAlbum(result);
+          setQuery("");
         });
-    }
   }
+
   return (
     <div className="App">
       <main>
@@ -47,7 +59,7 @@ function App() {
             <div className="card mb-3">
               <img src={artist.artists[0].strArtistBanner} className="card-img-top" alt="..."/>
               <div className="card-body">
-                <h5 className="card-title">{artist.artists[0].strArtist}</h5>
+                <button onClick={searchAlbum} className="card-title btn btn-primary btn-custom zoom">{artist.artists[0].strArtist}</button>
                 <ReadMoreReact
                   text={artist.artists[0].strBiographyEN}
                   min={80}
@@ -61,6 +73,7 @@ function App() {
         ) : ('')}
         {(typeof album.album != "undefined" && album.album != null) ? (
           <div>
+            
             <h1 style={{color:"white"}}>Album List</h1>
             {album.album.map((item) => {
               return (
