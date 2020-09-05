@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReadMoreReact from "read-more-react";
 import AlbumCard from "./components/AlbumCard"
 import './App.css';
 
@@ -18,28 +17,27 @@ function App() {
         .then(res => res.json())
         .then(result => {
           setArtist(result);
-          setQuery(result.artists[0].strArtist);
-          setAlbum('');
+          setAlbum([]);
         });
-    }
-    // if(event.key === "Enter") {
-    //   fetch(`${api.base}searchalbum.php?s=${query}`)
-    //     .then(res => res.json())
-    //     .then(result => {
-    //       setAlbum(result);
-    //     });
-    // }
-  }
-
-  function searchAlbum() {
-    console.log(query)
-    fetch(`${api.base}searchalbum.php?s=${query}`)
+      }
+      // if(event.key === "Enter") {
+        //   fetch(`${api.base}searchalbum.php?s=${query}`)
+        //   .then(res => res.json())
+        //   .then(result => {
+          //     setAlbum(result);
+          //     setQuery('');
+          //   });
+          // }
+        }
+        
+    function searchAlbum() {
+      fetch(`${api.base}searchalbum.php?s=${query}`)
         .then(res => res.json())
         .then(result => {
           setAlbum(result);
-          setQuery("");
-        });
-  }
+          setQuery('');
+      });
+    }
 
   return (
     <div className="App">
@@ -60,20 +58,13 @@ function App() {
               <img src={artist.artists[0].strArtistBanner} className="card-img-top" alt="..."/>
               <div className="card-body">
                 <button onClick={searchAlbum} className="card-title btn btn-primary btn-custom zoom">{artist.artists[0].strArtist}</button>
-                <ReadMoreReact
-                  text={artist.artists[0].strBiographyEN}
-                  min={80}
-                  ideal={100}
-                  max={500}
-                  readMoreText="Read More"
-                />
+                <p>{artist.artists[0].strBiographyEN}</p>
               </div>
             </div>
           </div>
         ) : ('')}
         {(typeof album.album != "undefined" && album.album != null) ? (
           <div>
-            
             <h1 style={{color:"white"}}>Album List</h1>
             {album.album.map((item) => {
               return (
