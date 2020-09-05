@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import * as Scroll from 'react-scroll';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import AlbumCard from "./components/AlbumCard"
 import './App.css';
 
@@ -20,24 +22,25 @@ function App() {
           setAlbum([]);
         });
       }
-      // if(event.key === "Enter") {
-        //   fetch(`${api.base}searchalbum.php?s=${query}`)
-        //   .then(res => res.json())
-        //   .then(result => {
-          //     setAlbum(result);
-          //     setQuery('');
-          //   });
-          // }
-        }
+  }
         
-    function searchAlbum() {
-      fetch(`${api.base}searchalbum.php?s=${query}`)
-        .then(res => res.json())
-        .then(result => {
-          setAlbum(result);
-          setQuery('');
-      });
-    }
+  function searchAlbum() {
+    fetch(`${api.base}searchalbum.php?s=${query}`)
+      .then(res => res.json())
+      .then(result => {
+        setAlbum(result);
+        setQuery('');
+    });
+    scrollTo()
+  }
+
+  function scrollToTop() {
+    scroll.scrollToTop();
+  }
+
+  function scrollTo() {
+    scroll.scrollTo(800);
+  }
 
   return (
     <div className="App">
@@ -77,6 +80,7 @@ function App() {
                 />
               );
             })}
+            <button className="btn btn-primary btn-custom zoom" onClick={scrollToTop}>To the top!</button>
           </div>
         ) : ('')}
       </main>
