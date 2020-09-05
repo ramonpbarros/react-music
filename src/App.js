@@ -1,12 +1,83 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ReadMoreReact from "read-more-react";
+import AlbumCard from "./components/AlbumCard"
 import './App.css';
 
+const api = {
+  base: "https://theaudiodb.com/api/v1/json/1/"
+}
+
 function App() {
+  const [query, setQuery] = useState('');
+  const [artist, setArtist] = useState([]);
+  const [album, setAlbum] = useState([]);
+
+  const search = event => {
+    if(event.key === "Enter") {
+      fetch(`${api.base}search.php?s=${query}`)
+        .then(res => res.json())
+        .then(result => {
+          setArtist(result);
+          console.log(result)
+          setQuery('');
+        });
+    }
+    if(event.key === "Enter") {
+      fetch(`${api.base}searchalbum.php?s=${query}`)
+        .then(res => res.json())
+        .then(result => {
+          setAlbum(result);
+          console.log(result);
+        });
+    }
+  }
   return (
     <div className="App">
-      <h1>My React app</h1>
-      <h2>Ramon Barros</h2>
+      <main>
+        <div className="search-box">
+          <input 
+            type="text" 
+            className="search-bar" 
+            placeholder="Search Artist..."
+            onChange={e => setQuery(e.target.value)}
+            value={query}
+            onKeyPress={search}
+          />
+        </div>
+        {(typeof artist.artists != "undefined") ? (
+          <div>
+            <div className="card mb-3">
+              <img src={artist.artists[0].strArtistBanner} className="card-img-top" alt="..."/>
+              <div className="card-body">
+                <h5 className="card-title">{artist.artists[0].strArtist}</h5>
+                <ReadMoreReact
+                  text={artist.artists[0].strBiographyEN}
+                  min={80}
+                  ideal={100}
+                  max={500}
+                  readMoreText="Read More"
+                />
+              </div>
+            </div>
+          </div>
+        ) : ('')}
+        {(typeof album.album != "undefined") ? (
+          <div>
+            <h1 style={{color:"white"}}>Album List</h1>
+            {album.album.map((item) => {
+              return (
+                <AlbumCard
+                  key = {item.idAlbum}
+                  name = {item.strAlbum}
+                  year = {item.intYearReleased}
+                  image = {item.strAlbumThumb}
+                  description = {item.strDescriptionEN}
+                />
+              );
+            })}
+          </div>
+        ) : ('')}
+      </main>
     </div>
   );
 }

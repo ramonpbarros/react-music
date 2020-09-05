@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'montseratt', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +15,72 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+main {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1c204f 0%, #030303 100%);
+  padding: 25px;
+}
+
+.search-box {
+  width: 100%;
+  margin: 0 0 75px;
+  position: relative;
+}
+
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 15px;
+
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 0px 16px 16px;
+  margin-top: -25px;
+
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
+
+  color: #313131;
+  font-size: 20px;
+
+  transition: 0.4s ease;
+}
+
+.search-box .search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.read-more-button {
+  display: block;
+  margin-left: 3px;
+  color: #f0860d;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.read-more-button:hover {
+  color: #f0860d;
+  transform: scale(1.05);
+}
+
+.web-link {
+  display: block;
+  margin-left: 3px;
+  color: #f0860d;
+  cursor: pointer;
+  transition: transform 0.3s;
+  text-decoration: underline;
+}
+
+.web-link:hover {
+  color: #f0860d;
+  transform: scale(1.05);
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
