@@ -18,7 +18,6 @@ function App() {
         .then(res => res.json())
         .then(result => {
           setArtist(result);
-          console.log(result)
           setQuery('');
         });
     }
@@ -27,7 +26,6 @@ function App() {
         .then(res => res.json())
         .then(result => {
           setAlbum(result);
-          console.log(result);
         });
     }
   }
@@ -44,7 +42,7 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        {(typeof artist.artists != "undefined") ? (
+        {(typeof artist.artists != "undefined" && artist.artists != null) ? (
           <div>
             <div className="card mb-3">
               <img src={artist.artists[0].strArtistBanner} className="card-img-top" alt="..."/>
@@ -61,7 +59,7 @@ function App() {
             </div>
           </div>
         ) : ('')}
-        {(typeof album.album != "undefined") ? (
+        {(typeof album.album != "undefined" && album.album != null) ? (
           <div>
             <h1 style={{color:"white"}}>Album List</h1>
             {album.album.map((item) => {
